@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.itmuch.cloud</groupId>
+    <artifactId>microservice-spring-cloud</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>microservice-spring-cloud</name>
+    <description>spring cloud 学习</description>
+
+    <modules>
+        <module>microservice-provider-user</module>
+        <module>microservice-consumer-movie</module>
+        <module>microservice-consumer-movie-feign</module>
+        <module>microservice-consumer-movie-feign-customizing</module>
+        <module>microservice-discovery-eureka</module>
+        <module>microservice-consumer-movie-ribbon</module>
+        <module>microservice-consumer-movie-ribbon-properties-customizing</module>  
+		<module>microservice-consumer-movie-ribbon-without-eureka</module>
+		<module>
+		microservice-consumer-movie-ribbon-with-hystrix
+		</module>
+		<module>
+		microservice-consumer-movie-ribbon-with-hystrix2
+		</module>
+		<module>
+		microservice-consumer-movie-feign-with-hystrix-factory
+		</module>
+        <module>microservice-consumer-movie-health</module>
+        <module>microservice-consumer-movie-feign-with-hystrix-customizing</module>
+        <module>microservice-hystrix-dashboard</module>
+        <module>microservice-hystrix-turbine</module>
+        <module>microservice-hystrix-turbine2</module>
+        <module>microservice-gateway-zuul</module>
+        <module>microservice-gateway-zuul-regexp</module>
+        <module>microservice-gateway-zuul-fallback</module>
+        <module>microservice-file-upload</module>
+        <module>microservice-config-server</module>
+        <module>microservice-config-server-eureka</module>
+        <module>microservice-config-server-encrypt</module>
+        <module>microservice-config-server-authc</module>
+        <module>microservice-config-client</module>
+        <module>microservice-config-client-eureka</module>
+        <module>microservice-config-client-authc</module>
+        <module>microservice-config-client-refresh</module>
+        <module>microservice-config-client-refresh-bus</module>
+    </modules>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.13.RELEASE</version>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Edgware.SR4</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+
+    <!-- springboot maven打包补丁
+   执行打包命令 mvn clean package,打出来的包会以项目名+版本号的形式放在target目录下
+   启动的方式是 java -jar  target/janti-1.0.0.jar
+    -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: foobar  # 对应microservice-config-server所获取的配置文件的{application}
+  cloud:
+    config:
+        #discovery.enabled=true 支持config server从服务发现组建发现
+       discovery:
+         enabled: true
+         service-id: microservice-config-server-eureka
+       profile: dev
+
+eureka:
+  client:
+    service-url:
+         defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}

@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: microservice-consumer-movie-ribbon-with-hystrix2
+server:
+  #访问端口
+  port: 8010
+  #context-path默认为 /
+  context-path: /ribbon
+
+
+
+management:
+  #设为false,显示服务器详细的健康信息
+  security:
+    enabled: false
+  # spring-boot-starter-acturator，管理端口，一般配置为8081
+  port: 8081
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+    #home-page-url-path默认为 /
+    home-page-url-path: /ribbon
+    #管理端口和访问端口分离可以使用下面配置
+    metadata-map:
+       #与上面配置的management.port一致，这样，hystrix、turbine可以使用这个端口访问
+       #management.port: ${management.port:8081}
+       management.port: 8081
+

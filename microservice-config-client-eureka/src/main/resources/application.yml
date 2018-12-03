@@ -1,0 +1,7 @@
+server:
+  port: 8081
+profile: ad
+
+management:
+  security:
+    enabled: false

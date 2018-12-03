@@ -1,0 +1,28 @@
+server:
+  port: 8040
+spring:
+  application:
+    name: microservice-gateway-zuul
+eureka:
+  client:
+    service-url:
+       defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+
+zuul:
+  #配置后，除了routes下面配置的微服务，其他服务都被忽略
+  #这里也可以只配置忽略的服务，多个用,隔开
+  #如：ignoredServices: microservice-consumer-movie-ribbon-with-hystrix
+  ignoredServices: '*'
+  routes:
+    #增加或更改代理路由
+    #这个时候可以使用http://10.5.33.71:8040/user/访问microservice-provider-user服务，当ignoredServices: '*'时，不可以
+    #使用http://10.5.33.71:8040/microservice-provider-user/,当ignoredServices单个服务配置时，依旧可以
+    microservice-provider-user: /user/**
+
+
+
+
+

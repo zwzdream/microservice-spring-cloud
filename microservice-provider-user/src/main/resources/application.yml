@@ -1,0 +1,42 @@
+server:
+  port: 7900
+spring:
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:                       #指定数据源
+    platform: h2                    #指定数据源类型
+    schema: classpath:schema.sql    #指定h2数据库的建表脚本
+    data: classpath:data.sql        # 指定h2数据库的insert脚本
+  application:
+    name: microservice-provider-user
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    com.itmuch: DEBUG
+eureka:
+  client:
+    #表示eureka client间隔多久去拉取服务器注册信息,默认为30秒
+     #registry-fetch-interval-seconds: 30
+    #默认的心跳实现方式可以有效的检查eureka客户端进程是否正常运作，但是无法保证客户端应用能够正常提供服务
+    #通过在eureka客户端中配置:eureka.client.healthcheck.enabled=true，就可以改变eureka server对客户端健康检测的方式，改用actuator的/health端点来检测
+
+  serviceUrl:
+       defaultZone: http://localhost:8761/eureka   # 指定注册中心的地址
+  instance:
+     #true使用ip注册，默认false（这时使用机器名注册）
+     prefer-ip-address: true
+     instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+     metadata-map:
+       zone: ABC      # eureka可以理解的元数据
+       lilizhou: BBC  # 不会影响客户端行为
+       #下面两个配置可以解决Eureka Server不踢出已关停的节点的问题,测试用，生产环境不能配，会破坏Eureka保护机制
+       #eureka客户端需要多长时间发送心跳给eureka服务器，表明他仍然或者，默认30秒
+     lease-renewal-interval-in-seconds: 1
+     #eureka服务器在接受到实例的最后一次发出的心跳后，需要等待多久才可以将此实例删除
+     lease-expiration-duration-in-seconds: 2

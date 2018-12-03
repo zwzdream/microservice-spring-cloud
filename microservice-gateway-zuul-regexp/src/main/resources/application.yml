@@ -1,0 +1,26 @@
+server:
+  port: 8040
+spring:
+  application:
+    name: microservice-gateway-zuul-regexp
+eureka:
+  client:
+    service-url:
+       defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+
+
+
+logging:
+  level:
+    com.netflix: debug
+
+#关于springboot-actuator监控的401无权限访问，需要配置
+management.security.enabled: false
+
+
+
+
+   

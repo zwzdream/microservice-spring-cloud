@@ -1,0 +1,17 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    config:
+      server:
+        git:
+         #gitee的url地址，里面有yml配置文件
+         # uri: https://gitee.com/zwzdream/config-server-repo
+         #本地仓库
+          uri: file:///E:/Program Files/config-server-repo
+
+
+
+
+
+          

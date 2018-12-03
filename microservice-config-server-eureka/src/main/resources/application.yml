@@ -1,0 +1,25 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: microservice-config-server-eureka
+  cloud:
+    config:
+      server:
+        git:
+         #gitee的url地址，里面有yml配置文件
+         # uri: https://gitee.com/zwzdream/config-server-repo
+         #本地仓库
+          uri: file:///E:/Program Files/config-server-repo
+eureka:
+  client:
+    service-url:
+         defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+
+
+
+
+          
